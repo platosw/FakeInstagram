@@ -36,6 +36,7 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 app.use(methodOverride('_method'));
+app.use(express.static('public'));
 
 // Mount Routes
 app.use('/', indexController);

@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+html body {
+    margin: 0;
+    padding: 0;
+}
+
+.logging {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+}
+
+.logging h1 {
+    margin-left: 39%;
+}
+
+.logging a {
+    color: white;
+    text-decoration: none;
+}
