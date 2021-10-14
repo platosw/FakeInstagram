@@ -13,7 +13,6 @@ const postingSchema = new Schema({
     },
     imgURL: String,
     text: String,
-    comment: [commentSchema],
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User'

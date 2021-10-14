@@ -24,31 +24,13 @@
     </header>
     <main>
         <div class="container">
-            <img src="<%= posting.img %>" alt="">
+            <img src="<%= posting.img %>" style="width: 100%;">
             <p><%= posting.text %></p>
-            <% if (user === posting.userId) { %>
+            <% if (user) { %>
             <form action="/<%= posting._id %>?_method=DELETE" method="POST">
                 <input type="submit" value="DELETE">
             </form>
-            <% } %>
-        </div>
-        <div>
-            <ul>
-                <% for (let i = 0; i < comment.length; i++) { %>
-                <li><%= comment[i].text %></li>
-                <% if (user === posting.userId) { %>
-                <form action="">
-                    <input type="submit" value="delete">
-                    <input type="submit" value="edit">
-                </form>
-                <% } %>
-                <% } %>
-            </ul>
-            <% if (user) { %>
-            <form action="">
-                <input type="text" name="text" placeholder="Enter your comment">
-                <input type="submit" value="Add comment">
-            </form>
+            <a href="/<%= posting._id %>/edit">EDIT</a>
             <% } %>
         </div>
     </main>

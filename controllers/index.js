@@ -17,6 +17,14 @@ const Comment = require('../models/comment.js');
 //     });
 // });
 
+// const query = req.session.user ? {
+//     author: req.session.user
+// } : {};
+// Meds.find(query, (err, meds)
+
+
+
+
 router.get('/', async (req, res) => {
     const user = await User.findById(req.session.user);
     const postings = await Posting.find({});
@@ -24,7 +32,7 @@ router.get('/', async (req, res) => {
     res.render('home.ejs', {
         user,
         postings
-    })
+    });
 });
 
 // new
@@ -46,8 +54,8 @@ router.delete('/:id', (req, res) => {
 
 // update
 router.put('/:id/edit', (req, res) => {
-    Posting.findByIdAndUpdate(req.params.id, req.body, (error, updateItem) => {
-        res.redirect(`/`);
+    Posting.findByIdAndUpdate(req.params.id, req.body, (error, updatePosting) => {
+        res.redirect(`/${req.params.id}`);
     });
 });
 
@@ -70,10 +78,11 @@ router.post('/', (req, res) => {
 });
 
 // edit
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', async (req, res) => {
+    const user = await User.findById(req.session.user);
     Posting.findById(req.params.id, (error, findPosting) => {
         res.render('edit.ejs', {
-            user: req.session.user,
+            user,
             posting: findPosting,
         });
     });
@@ -82,12 +91,10 @@ router.get('/:id/edit', (req, res) => {
 // show
 router.get('/:id', async (req, res) => {
     const user = await User.findById(req.session.user);
-    const comment = await Comment.find({});
     Posting.findById(req.params.id, (err, posting) => {
         res.render('show.ejs', {
             user,
-            posting,
-            comment
+            posting
         });
     });
 });
