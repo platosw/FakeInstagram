@@ -26,7 +26,7 @@
         <div class="container">
             <img src="<%= posting.img %>" alt="">
             <p><%= posting.text %></p>
-            <% if (user) { %>
+            <% if (user === posting.userId) { %>
             <form action="/<%= posting._id %>?_method=DELETE" method="POST">
                 <input type="submit" value="DELETE">
             </form>

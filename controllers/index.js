@@ -83,7 +83,6 @@ router.get('/:id/edit', (req, res) => {
 router.get('/:id', async (req, res) => {
     const user = await User.findById(req.session.user);
     const comment = await Comment.find({});
-    console.log(user);
     Posting.findById(req.params.id, (err, posting) => {
         res.render('show.ejs', {
             user,
