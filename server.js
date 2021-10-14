@@ -31,7 +31,7 @@ app.use(express.urlencoded({
     extended: false
 }));
 app.use(expressSession({
-    secret: 'cknlkclnclnen', // this is used to digitally sign our session cookies (prevents forgery)
+    secret: process.env.SECRET, // this is used to digitally sign our session cookies (prevents forgery)
     resave: false, // this option updates session storage after request
     saveUninitialized: false
 }));
