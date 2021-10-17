@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const Posting = require('../models/posting.js');
 const User = require('../models/user.js');
-const Comment = require('../models/comment.js');
 
 // index
 // router.get('/', (req, res) => {
@@ -28,7 +27,7 @@ const Comment = require('../models/comment.js');
 router.get('/', async (req, res) => {
     const user = await User.findById(req.session.user);
     const postings = await Posting.find({});
-    console.log(user);
+    // console.log(Posting.userId.type);
     res.render('home.ejs', {
         user,
         postings
@@ -52,6 +51,17 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// delete for comment
+router.delete('/:id/comment', (req, res) => {
+    Posting.findById(req.params.id, (err, posting) => {
+        posting.comment[0].remove();
+        posting.save((err) => {
+            console.log(`removed!`);
+        });
+        res.redirect(`/${req.params.id}`);
+    });
+});
+
 // update
 router.put('/:id/edit', (req, res) => {
     Posting.findByIdAndUpdate(req.params.id, req.body, (error, updatePosting) => {
@@ -60,7 +70,14 @@ router.put('/:id/edit', (req, res) => {
 });
 
 // update for comments (later)
-
+router.put('/:id/comment/edit/:comment', (req, res) => {
+    req.body.user = req.session.user;
+    Posting.findById(req.params.comment, (error, posting) => {
+        posting.comment.push(req.body);
+        posting.save();
+        res.redirect(`/${req.params.id}`);
+    });
+})
 
 
 // create
@@ -77,6 +94,16 @@ router.post('/', (req, res) => {
     });
 });
 
+//create for comment
+router.post('/:id', (req, res) => {
+    req.body.user = req.session.user;
+    Posting.findById(req.params.id, (error, posting) => {
+        posting.comment.push(req.body);
+        posting.save();
+        res.redirect(`/${req.params.id}`);
+    });
+});
+
 // edit
 router.get('/:id/edit', async (req, res) => {
     const user = await User.findById(req.session.user);
@@ -87,6 +114,19 @@ router.get('/:id/edit', async (req, res) => {
         });
     });
 });
+
+// edit comment
+router.get('/:id/comment/edit/:comment', async (req, res) => {
+    const user = await User.findById(req.session.user);
+    const posting = await Posting.findById(req.params.id);
+    Posting.findById(req.params.comment, (error, data) => {
+        res.render('editcomment.ejs', {
+            user,
+            comment: data,
+            posting
+        });
+    });
+})
 
 // show
 router.get('/:id', async (req, res) => {
