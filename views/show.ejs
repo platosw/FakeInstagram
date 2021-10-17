@@ -42,7 +42,7 @@
             </form>
             <a href="<%= posting._id%>/comment/edit/<%= c.comment %>"><button>Edit</button></a>
             <% }); %>
-            <form id="add-comment-form" method="POST" action="/<%= posting._id %>/comment">
+            <form id="add-comment-form" method="POST" action="/<%= posting._id %>">
                 <textarea name="comment" placeholder="Enter your comment"></textarea>
                 <input type="submit" value="Add comment">
             </form>
