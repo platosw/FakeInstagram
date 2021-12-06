@@ -1,49 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Fake Instagram</title>
-</head>
-
-<body>
-    <header>
-        <h1 style="display: inline;"><a href="/">Fake Instagram</a></h1>
-        <nav style="display: inline;">
-            <% if(user) { %>
-            <p>Welcome <%=user.username%></p>
-            <a href="/new">Post</a>
-            <a href="/users/logout">Log out</a>
-            <% } else { %>
-            <a href="/users/login">Log in</a>
-            <a href="/users/signup">Sign up</a>
-            <% } %>
-        </nav>
-    </header>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+        <link rel="stylesheet" href="/style.css">
+        <title>Fake Instagram</title>
+    </head>
+    
+    <body>
+        <header class="container-1">
+            <div class="logging">
+                <h1><a href="/">Fake Instagram</a></h1>
+                <div class="logging-menu">
+                    <nav>
+                        <% if(user) { %>
+                        <p>Welcome <%= user.username %></p>
+                        <a href="/new">Post</a>
+                        <a href="/users/logout">Log out</a>
+                        <% } else { %>
+                        <a href="/users/login">Log in</a>
+                        <a href="/users/signup">Sign up</a>
+                        <% } %>
+                    </nav>
+                </div>
+            </div>
+        </header>
     <main>
         <div class="container">
             <img src="<%= posting.img %>" style="width: 100%;">
             <p><%= posting.text %></p>
+            <a href="/<%= posting._id %>/edit">EDIT</a>
             <% if (user) { %>
             <form action="/<%= posting._id %>?_method=DELETE" method="POST">
                 <input type="submit" value="DELETE">
             </form>
-            <a href="/<%= posting._id %>/edit">EDIT</a>
             <% } %>
+            <hr>
+            <h4>Comments</h4>
+            <br>
+            <br>
             <% posting.comment.forEach((c) => { %>
             <p><%= c.comment %></p>
             <form action="/<%= posting._id %>/comment?_method=DELETE" method="POST">
-                <input type="submit" value="DELETE">
+                <input type="submit" value="DELETE Comment">
             </form>
-            <a href="<%= posting._id%>/comment/edit/<%= c.comment %>"><button>Edit</button></a>
             <% }); %>
             <form id="add-comment-form" method="POST" action="/<%= posting._id %>">
-                <textarea name="comment" placeholder="Enter your comment"></textarea>
+                <input type="text" name="comment" placeholder="Enter your comment"></input>
                 <input type="submit" value="Add comment">
             </form>
         </div>

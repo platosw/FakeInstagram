@@ -70,9 +70,9 @@ router.put('/:id/edit', (req, res) => {
 });
 
 // update for comments (later)
-router.put('/:id/comment/edit/:comment', (req, res) => {
+router.put('/comments/:id', (req, res) => {
     req.body.user = req.session.user;
-    Posting.findById(req.params.comment, (error, posting) => {
+    Posting.findById(req.params.id, (error, posting) => {
         posting.comment.push(req.body);
         posting.save();
         res.redirect(`/${req.params.id}`);
@@ -88,7 +88,7 @@ router.post('/', (req, res) => {
 });
 
 // create for login
-router.post('/', (req, res) => {
+router.post('/login', (req, res) => {
     Posting.create(req.body, (error, createPostings) => {
         res.redirect('/');
     });
@@ -116,7 +116,7 @@ router.get('/:id/edit', async (req, res) => {
 });
 
 // edit comment
-router.get('/:id/comment/edit/:comment', async (req, res) => {
+router.get('/:id/comments', async (req, res) => {
     const user = await User.findById(req.session.user);
     const posting = await Posting.findById(req.params.id);
     Posting.findById(req.params.comment, (error, data) => {
@@ -132,6 +132,7 @@ router.get('/:id/comment/edit/:comment', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const user = await User.findById(req.session.user);
     Posting.findById(req.params.id, (err, posting) => {
+        console.log('P', posting);
         res.render('show.ejs', {
             user,
             posting

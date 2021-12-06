@@ -25,8 +25,8 @@
     </header>
     <main>
         <h2>Edit Comment</h2>
-        <form action="/<%= posting._id %>/comment/edit/<%= comment %>?_method=PUT" method="POST">
-            <textarea name="comment" value="/<%= posting._id %>/comment/edit/<%= comment %>"></textarea><br />
+        <form action="/comments/<%= posting._id %>?_method=PUT" method="POST">
+            <textarea name="comment" value="/comments/<%= posting._id.comment%>"></textarea><br />
             <input type="submit" value="Edit comment">
         </form>
     </main>
