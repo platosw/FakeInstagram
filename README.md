@@ -1,11 +1,12 @@
-# GA Journey
+# Fake Instagram
 
-The material in General Assembly, convenient and easy to clean up if we have the note the idea of creating this app.
+I want to try to make some SNS application such as Instagram.
 
 ## Technologies Used
 <ul>
-<li>React</li>
-<li>SASS</li>
+<li>HTML</li>
+<li>CSS</li>
+<li>Skeleton Boilerplate</li>
 <li>Node.js</li>
 <li>Express</li>
 <li>MongoDB/Mongoose</li>
@@ -24,9 +25,7 @@ This is deployed app on <a href='https://fakeinstagramxx.herokuapp.com/'>Netlify
 ## Future Enhancements
 
 <ul>
-    <li>Athentication</li>
     <li>Authorization</li>
     <li>Categorized Ability</li>
-    <li>Styling with Bootstrap</li>
-    <li>Advanced Text Type Input Form</li>
+    <li>Like/Dislike Ability</li>
 </ul>
