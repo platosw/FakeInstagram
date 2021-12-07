@@ -28,4 +28,5 @@ This is deployed app on <a href='https://fakeinstagramxx.herokuapp.com/'>Netlify
     <li>Authorization</li>
     <li>Categorized Ability</li>
     <li>Like/Dislike Ability</li>
+    <li>File Uploader</li>
 </ul>
